@@ -46,10 +46,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final user = <String, dynamic>{
-      "first": "Ada",
-      "last": "Lovelace",
-      "born": 1815
-    };
+  "first": "Alan",
+  "middle": "Mathison",
+  "last": "Turing",
+  "born": 1912
+};
     void addUserToDatabase() {}
     var db = FirebaseFirestore.instance;
     db.collection("users").add(user).then((DocumentReference doc) =>
