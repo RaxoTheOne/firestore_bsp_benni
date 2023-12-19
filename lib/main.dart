@@ -38,10 +38,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   void addUserToDatabase() {
     final user = <String, dynamic>{
-      "first": "Benjamin",
-      "middle": "Jonas",
+      "first": "Mia",
+      "middle": "Emilia",
+      "third": "Marie",
       "last": "Gayda-Knop",
-      "born": 1994,
+      "born": 2017,
     };
 
     var db = FirebaseFirestore.instance;
