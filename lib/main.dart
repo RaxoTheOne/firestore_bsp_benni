@@ -1,15 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firestore_bsp_benni/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async{ 
+  
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  var db = FirebaseFirestore.instance;
+   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +45,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = <String, dynamic>{
+      "first": "Ada",
+      "last": "Lovelace",
+      "born": 1815
+};
+
+    void addUserToDatabase() {}
+     var db = FirebaseFirestore.instance;
+     db.collection("users").add(user).then((DocumentReference doc) =>
+    print('DocumentSnapshot added with ID: ${doc.id}'));
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -56,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'You have pushed the button this many times:',
             ),
+            ElevatedButton(onPressed: addUserToDatabase, child: const Text("Add User To DB")),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
