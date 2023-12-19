@@ -46,16 +46,27 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final user = <String, dynamic>{
-  "first": "Alan",
-  "middle": "Mathison",
-  "last": "Turing",
-  "born": 1912
-};
+      "first": "Alan",
+      "middle": "Mathison",
+      "last": "Turing",
+      "born": 1912
+    };
     void addUserToDatabase() {}
     var db = FirebaseFirestore.instance;
     db.collection("users").add(user).then((DocumentReference doc) =>
-        print('DocumentSnapshot added with ID: ${doc.id}'));
+        print('DocumentSnapshot added with ID: ${doc.id}')
+        );
 
+    Future<void> readUserFromDatabase() async {
+      // Instanz holen
+      var db = FirebaseFirestore.instance;
+      // Dokumente herunterladen
+      await db.collection('users').get().then((event) {
+        for (var doc in event.docs) {
+          print('${doc.id} => ${doc.data()}');
+        }
+      });
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -65,9 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            ElevatedButton(onPressed: readUserFromDatabase, child: const Text('read Data')),
             ElevatedButton(
                 onPressed: addUserToDatabase,
                 child: const Text("Add User To DB")),
