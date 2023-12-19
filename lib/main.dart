@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 79, 35, 156)),
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 79, 35, 156)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Firestore Beispiel'),
@@ -35,7 +36,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   void addUserToDatabase() {
     final user = <String, dynamic>{
       "first": "Benjamin",
@@ -46,8 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     var db = FirebaseFirestore.instance;
     db.collection("users").add(user).then((DocumentReference doc) =>
-      print('DocumentSnapshot added with ID: ${doc.id}')
-    );
+        print('DocumentSnapshot added with ID: ${doc.id}'));
   }
 
   Future<void> readUserFromDatabase() async {
@@ -72,11 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(onPressed: readUserFromDatabase, child: const Text('read Data')),
             ElevatedButton(
-              onPressed: addUserToDatabase,
-              child: const Text("Add User To DB")
-            ),
+                onPressed: readUserFromDatabase,
+                child: const Text('read Data')),
+            ElevatedButton(
+                onPressed: addUserToDatabase,
+                child: const Text("Add User To DB")),
           ],
         ),
       ),
