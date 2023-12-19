@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 73, 34, 141)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 79, 35, 156)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Firestore Beispiel'),
@@ -36,30 +36,33 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  @override
-  Widget build(BuildContext context) {
+  void addUserToDatabase() {
     final user = <String, dynamic>{
       "first": "Benjamin",
       "middle": "Jonas",
       "last": "Gayda-Knop",
       "born": 1994,
     };
-    void addUserToDatabase() {}
+
     var db = FirebaseFirestore.instance;
     db.collection("users").add(user).then((DocumentReference doc) =>
-        print('DocumentSnapshot added with ID: ${doc.id}')
-        );
+      print('DocumentSnapshot added with ID: ${doc.id}')
+    );
+  }
 
-    Future<void> readUserFromDatabase() async {
-      // Instanz holen
-      var db = FirebaseFirestore.instance;
-      // Dokumente herunterladen
-      await db.collection('users').get().then((event) {
-        for (var doc in event.docs) {
-          print('${doc.id} => ${doc.data()}');
-        }
-      });
-    }
+  Future<void> readUserFromDatabase() async {
+    // Instanz holen
+    var db = FirebaseFirestore.instance;
+    // Dokumente herunterladen
+    await db.collection('users').get().then((event) {
+      for (var doc in event.docs) {
+        print('${doc.id} => ${doc.data()}');
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -71,8 +74,9 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             ElevatedButton(onPressed: readUserFromDatabase, child: const Text('read Data')),
             ElevatedButton(
-                onPressed: addUserToDatabase,
-                child: const Text("Add User To DB")),
+              onPressed: addUserToDatabase,
+              child: const Text("Add User To DB")
+            ),
           ],
         ),
       ),
