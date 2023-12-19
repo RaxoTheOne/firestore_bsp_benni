@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
     void addUserToDatabase() {}
      var db = FirebaseFirestore.instance;
      db.collection("users").add(user).then((DocumentReference doc) =>
-    print('DocumentSnapshot added with ID: ${doc.id}'));
+     print('DocumentSnapshot added with ID: ${doc.id}'));
 
     return Scaffold(
       appBar: AppBar(
