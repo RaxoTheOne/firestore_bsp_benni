@@ -46,10 +46,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final user = <String, dynamic>{
-      "first": "Alan",
-      "middle": "Mathison",
-      "last": "Turing",
-      "born": 1912
+      "first": "Benjamin",
+      "middle": "Jonas",
+      "last": "Gayda-Knop",
+      "born": 1994,
     };
     void addUserToDatabase() {}
     var db = FirebaseFirestore.instance;
