@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1063145260614",
+    "project_id": "livedemo-39597",
+    "storage_bucket": "livedemo-39597.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063145260614:android:cb069ddf0f6dfdcc516c47",
+        "android_client_info": {
+          "package_name": "com.example.firestore_bsp_benni"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqO1wfJBYyJhblkneQFVY1JwtIP0UK5k8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

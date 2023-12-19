@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBPsUR8fvuuOLWDifkn9_m5MEBj60BHfE8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1063145260614</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.firestoreBspBenni.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>livedemo-39597</string>
+	<key>STORAGE_BUCKET</key>
+	<string>livedemo-39597.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1063145260614:ios:33b71d6e0c144a14516c47</string>
+</dict>
+</plist>
