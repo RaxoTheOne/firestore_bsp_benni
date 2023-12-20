@@ -12,10 +12,8 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // Verwenden Sie const, um unnötige Neuinitialisierungen zu vermeiden
   MyApp({super.key});
 
-  // Verwenden Sie .instance, um den Standardkonstruktor zu ersetzen
   final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
   @override
