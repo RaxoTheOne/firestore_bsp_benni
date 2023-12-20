@@ -55,6 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> signOutFromGoogle() async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
     await googleSignIn.signOut();
+
+    await FirebaseAuth.instance.signOut();
     print("Signed Out");
   }
 
@@ -103,7 +105,8 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: signInWithGoogle,
               child: const Text("Sign In With Google"),
             ),
-            ElevatedButton(onPressed: signOutFromGoogle, child: const Text('Log Out'))
+            ElevatedButton(
+                onPressed: signOutFromGoogle, child: const Text('Log Out'))
           ],
         ),
       ),
