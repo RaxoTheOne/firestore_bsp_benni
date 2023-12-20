@@ -54,10 +54,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void addUserToDatabase() {
     final user = <String, dynamic>{
-      "first": "Cynthia",
-      "middle": "Janice",
-      "last": "Knop",
-      "born": 1995,
+      "first": "Björn",
+      "middle": "Vincent",
+      "last": "Gayda",
+      "born": 1991,
     };
 
     var db = FirebaseFirestore.instance;
