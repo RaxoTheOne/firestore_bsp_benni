@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -13,6 +12,12 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
+  // Verwenden Sie const, um unnötige Neuinitialisierungen zu vermeiden
+  MyApp({super.key});
+
+  // Verwenden Sie .instance, um den Standardkonstruktor zu ersetzen
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,16 +26,16 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 79, 35, 156)),
         useMaterial3: true,
       ),
-      home: MyHomePage(title: 'Flutter Firestore Beispiel'),
+      home: const MyHomePage(title: 'Flutter Firestore Beispiel'),
       navigatorObservers: [
-        FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
+        FirebaseAnalyticsObserver(analytics: analytics),
       ],
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.title});
 
   final String title;
 
