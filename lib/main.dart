@@ -52,6 +52,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
+  Future<void> signOutFromGoogle() async {
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    await googleSignIn.signOut();
+    print("Signed Out");
+  }
+
   void addUserToDatabase() {
     final user = <String, dynamic>{
       "first": "Björn",
@@ -97,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: signInWithGoogle,
               child: const Text("Sign In With Google"),
             ),
+            ElevatedButton(onPressed: signOutFromGoogle, child: const Text('Log Out'))
           ],
         ),
       ),
