@@ -74,10 +74,12 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             ElevatedButton(
                 onPressed: readUserFromDatabase,
-                child: const Text('read Data')),
+                child: const Text('read Data')
+                ),
             ElevatedButton(
                 onPressed: addUserToDatabase,
-                child: const Text("Add User To DB")),
+                child: const Text("Add User To DB")
+                ),
           ],
         ),
       ),
