@@ -49,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
         await googleUser?.authentication;
     final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+    print('Signed In');
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
