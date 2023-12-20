@@ -1,35 +1,36 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firestore_bsp_benni/firebase_options.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 79, 35, 156)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 79, 35, 156)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Firestore Beispiel'),
+      home: MyHomePage(title: 'Flutter Firestore Beispiel'),
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
+      ],
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -38,21 +39,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-Future<UserCredential> signInWithGoogle() async {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-      final credential = GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
-      // return creds
-      return await FirebaseAuth.instance.signInWithCredential(credential);
-    }
+  Future<UserCredential> signInWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    final credential = GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
 
   void addUserToDatabase() {
     final user = <String, dynamic>{
-      "first": "Juna",
-      "middle": "Melina",
-      "third": "Seline",
+      "first": "Amelie",
+      "middle": "Lia",
       "last": "Gayda-Knop",
-      "born": 2019,
+      "born": 2023,
     };
 
     var db = FirebaseFirestore.instance;
@@ -61,9 +60,7 @@ Future<UserCredential> signInWithGoogle() async {
   }
 
   Future<void> readUserFromDatabase() async {
-    // Instanz holen
     var db = FirebaseFirestore.instance;
-    // Dokumente herunterladen
     await db.collection('users').get().then((event) {
       for (var doc in event.docs) {
         print('${doc.id} => ${doc.data()}');
@@ -83,13 +80,16 @@ Future<UserCredential> signInWithGoogle() async {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-                onPressed: readUserFromDatabase,
-                child: const Text('read Data')),
+              onPressed: readUserFromDatabase,
+              child: const Text('Read Data'),
+            ),
             ElevatedButton(
-                onPressed: addUserToDatabase,
-                child: const Text("Add User To DB")
-                ),
-            ElevatedButton(onPressed: signInWithGoogle, child: const Text("Sign In With Google")
+              onPressed: addUserToDatabase,
+              child: const Text("Add User To DB"),
+            ),
+            ElevatedButton(
+              onPressed: signInWithGoogle,
+              child: const Text("Sign In With Google"),
             ),
           ],
         ),
