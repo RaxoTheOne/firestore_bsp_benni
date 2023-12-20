@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firestore_bsp_benni/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +38,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+Future<UserCredential> signInWithGoogle() async {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      final credential = GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+      // return creds
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    }
+
   void addUserToDatabase() {
     final user = <String, dynamic>{
       "first": "Juna",
@@ -74,12 +84,13 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             ElevatedButton(
                 onPressed: readUserFromDatabase,
-                child: const Text('read Data')
-                ),
+                child: const Text('read Data')),
             ElevatedButton(
                 onPressed: addUserToDatabase,
                 child: const Text("Add User To DB")
                 ),
+            ElevatedButton(onPressed: signInWithGoogle, child: const Text("Sign In With Google")
+            ),
           ],
         ),
       ),
